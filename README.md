@@ -26,7 +26,7 @@ The objective of this app is are as follows :
 
 ### Important Files
 
-1. index.html - This file is the main file which is currently hosted by this repository at https://kshitijkc.github.io/. It requires [FastPriorityQueue.js](https://github.com/Kshitijkc/Kshitijkc.github.io/blob/master/FastPriorityQueue.js) and [headerFooter.css](https://github.com/Kshitijkc/Kshitijkc.github.io/blob/master/headerFooter.css) for implementing PriortyQueue and Styling puspose respectively.
+1. index.html - This file is the main file which is currently hosted by this repository at https://kshitijkc.github.io/. It requires [FastPriorityQueue.js](https://github.com/Kshitijkc/Kshitijkc.github.io/blob/master/FastPriorityQueue.js) and [headerFooter.css](https://github.com/Kshitijkc/Kshitijkc.github.io/blob/master/headerFooter.css) for implementing PriorityQueue and Styling puspose respectively.
 
 2. Main.class - This is the compiled form of the [Main.java](https://github.com/Kshitijkc/Kshitijkc.github.io/blob/master/Main.java). It's the same thing as the web app [index.html](https://github.com/Kshitijkc/Kshitijkc.github.io/blob/master/index.html) to run from Command Line Interface like: >> java Main.
 
