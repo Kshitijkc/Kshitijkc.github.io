@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Paragraph</title>
     <link rel="stylesheet" href="headerFooter.css">
+    <link rel="site icon" type="image/png" href="https://static.wixstatic.com/media/9ec6e4_52bf8c8dbf8d43bc8b1cdaf10a404d3d~mv2.png/v1/fill/w_40,h_40,al_c,q_80,usm_0.66_1.00_0.01/ic_launcher.webp">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -14,6 +15,7 @@
     <script>
         $(document).ready(function(){
             $("button").click(function(){
+                var timerStart = performance.now();
                 var passage = $.trim($("#passage").val()).toLowerCase().split(/\n{2}/);
                 var count = 0;
                 var map = new Map();
@@ -22,7 +24,7 @@
                         continue;
                     }
                     ++count;
-                    var words = paragraph.split(/[\s\n!?(),;:.]+/);
+                    var words = paragraph.split(/[\s\n]+/); // .split(/[\s\n!?(),;:.]+/) can be used instead of .split(/[\s\n]+/) for more fine grained word search
                     for(var word of words) {
                         if(!map.has(word)) {
                             map.set(word, new FastPriorityQueue());
@@ -35,28 +37,34 @@
                         }
                     }
                 }
+                
+                var timerSearch = performance.now();
                 var words = $.trim($("#WordList").val()).split(/[\s\n]+/);
                 document.getElementById("resultList").value = "";
+                var wordPrinted = new Set();
                 var counter = 0;
-                var timerStart = performance.now();
                 for(var word of words) {
                     if(word == "") {
                         continue;
                     }
-                    var paragraphs = map.get(word.toLowerCase());
-                    if(paragraphs == undefined) {
-                        document.getElementById("resultList").value += word + " : Not Found!\n\n";
-                        continue;
+                    var lowerCaseWord = word.toLowerCase();
+                    if(!wordPrinted.has(lowerCaseWord)) {
+                        wordPrinted.add(lowerCaseWord);
+                        var paragraphs = map.get(lowerCaseWord);
+                        if(paragraphs == undefined) {
+                            document.getElementById("resultList").value += word + " : Not Found!\n\n";
+                            continue;
+                        }
+                        counter = 0;
+                        document.getElementById("resultList").value += word + " : ";
+                        while (!paragraphs.isEmpty() && counter < 10) {
+                            document.getElementById("resultList").value += paragraphs.poll() + ", ";
+                            ++counter;
+                        }
+                        document.getElementById("resultList").value += "\n\n"
                     }
-                    counter = 0;
-                    document.getElementById("resultList").value += word + " : ";
-                    while (!paragraphs.isEmpty() && counter < 10) {
-                        document.getElementById("resultList").value += paragraphs.poll() + ", ";
-                        ++counter;
-                    }
-                    document.getElementById("resultList").value += "\n\n"
                 }
-                document.getElementById("paraWordTime").innerHTML = "Total Paragraphs : " + count + "   |   " + "Total Unique Words : " + map.size + "   |   Total Time Taken : " + (performance.now() - timerStart).toFixed(3) + " ms.";
+                document.getElementById("paraWordTime").innerHTML = "Total Paragraphs : " + count + "   |   " + "Total Unique Words : " + map.size + "   |   Total Time Taken : " + (performance.now() - timerStart).toFixed(3) + " ms." + "   |   Total Search Time : " + (performance.now() - timerSearch).toFixed(3) + " ms.";
             });            
         });
     </script>
@@ -86,7 +94,7 @@
     </div>
 
     <br/><center><p id="paraWordTime"> </p></center>
-    <center>Characters used for splitting : \s \n ! ? ( ) , ; : .</p></center>
+    <center>Characters used for splitting : \s \n</p></center> <!-- Print [\s \n ! ? ( ) , ; : .] in case of other option mentioned above for spiliting the paragraph-->
 
     <div class="footer">
         <p>Made by Kshitij Kumar.</p>
