@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html>
+    
 <head>
     <meta charset="UTF-8">
     <title>Paragraph</title>
@@ -9,8 +11,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script  src="FastPriorityQueue.js" type="text/javascript"></script>
-    <script>
-    </script>
     <script>
         $(document).ready(function(){
             $("button").click(function(){
@@ -45,7 +45,7 @@
                     }
                     var paragraphs = map.get(word.toLowerCase());
                     if(paragraphs == undefined) {
-                        document.getElementById("resultList").value += word + " : 0\n\n";
+                        document.getElementById("resultList").value += word + " : Not Found!\n\n";
                         continue;
                     }
                     counter = 0;
@@ -57,8 +57,7 @@
                     document.getElementById("resultList").value += "\n\n"
                 }
                 document.getElementById("paraWordTime").innerHTML = "Total Paragraphs : " + count + "   |   " + "Total Unique Words : " + map.size + "   |   Total Time Taken : " + (performance.now() - timerStart).toFixed(3) + " ms.";
-            });
-            
+            });            
         });
     </script>
 </head>
@@ -92,7 +91,6 @@
     <div class="footer">
         <p>Made by Kshitij Kumar.</p>
     </div>
-
 </body>
 
 </html>
