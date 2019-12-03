@@ -24,7 +24,7 @@
                         continue;
                     }
                     ++count;
-                    var words = paragraph.split(/[\s\n]+/); // .split(/[\s\n!?(),;:.]+/) can be used instead of .split(/[\s\n]+/) for more fine grained word search
+                    var words = paragraph.trim().split(/[\s+\n+]/); // .split(/[\s\n!?(),;:.]+/) can be used instead of .split(/[\s\n]+/) for more fine grained word search
                     for(var word of words) {
                         if(!map.has(word)) {
                             map.set(word, new FastPriorityQueue());
@@ -44,9 +44,8 @@
                 var wordPrinted = new Set();
                 var counter = 0;
                 for(var word of words) {
-                    if(word == "") {
-                        continue;
-                    }
+                    if(word == "") 
+                            continue;
                     var lowerCaseWord = word.toLowerCase();
                     if(!wordPrinted.has(lowerCaseWord)) {
                         wordPrinted.add(lowerCaseWord);
