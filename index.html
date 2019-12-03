@@ -24,7 +24,7 @@
                         continue;
                     }
                     ++count;
-                    var words = paragraph.trim().split(/[\s+\n+]/); // .split(/[\s\n!?(),;:.]+/) can be used instead of .split(/[\s\n]+/) for more fine grained word search
+                    var words = paragraph.trim().split(/[\s+\n+]/);  // .split(/[\s\n!?(),;:.]+/) can be used instead of .split(/[\s\n]+/) for more fine grained word search
                     for(var word of words) {
                         if(!map.has(word)) {
                             map.set(word, new FastPriorityQueue());
