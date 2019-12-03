@@ -15,7 +15,7 @@ The objective of this app is are as follows :
 
 ### What It Does
 
-1. Tokenize words by splitting at whitespace and some special characters like: \s \n ! ? ( ) , ; : .
+1. Tokenizes words by splitting at whitespace and some special characters like: \s \n
 
 2. Converts all words to lowercase
 
