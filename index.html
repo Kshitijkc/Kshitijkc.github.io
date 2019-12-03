@@ -39,7 +39,7 @@
                 }
                 
                 var timerSearch = performance.now();
-                var words = $.trim($("#WordList").val()).split(/[\s\n]+/);
+                var words = $.trim($("#WordList").val()).split(/[\s+\n+]/);
                 document.getElementById("resultList").value = "";
                 var wordPrinted = new Set();
                 var counter = 0;
