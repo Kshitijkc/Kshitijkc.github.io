@@ -1,4 +1,4 @@
-# TapSearch Api
+# Word Search App
 
 This project is about building a word search engine from a long paragrahs. The link to visit the app is: https://kshitijkc.github.io/.
 
